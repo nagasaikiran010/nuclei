@@ -196,7 +196,7 @@ func main() {
 
 	// Setup filename for graceful exits
 	resumeFileName := types.DefaultResumeFilePath()
-	if options.Resume == "" {
+	if options.Resume != "" {
 		resumeFileName = options.Resume
 	}
 	c := make(chan os.Signal, 1)
@@ -443,6 +443,7 @@ on extensive configurability, massive extensibility and ease of use.`)
 		flagSet.BoolVarP(&options.ShowBrowser, "show-browser", "sb", false, "show the browser on the screen when running templates with headless mode"),
 		flagSet.StringSliceVarP(&options.HeadlessOptionalArguments, "headless-options", "ho", nil, "start headless chrome with additional options", goflags.FileCommaSeparatedStringSliceOptions),
 		flagSet.BoolVarP(&options.UseInstalledChrome, "system-chrome", "sc", false, "use local installed Chrome browser instead of nuclei installed"),
+		flagSet.StringVarP(&options.CDPEndpoint, "cdp-endpoint", "cdpe", "", "use remote browser via Chrome DevTools Protocol (CDP) endpoint"),
 		flagSet.BoolVarP(&options.ShowActions, "list-headless-action", "lha", false, "list available headless actions"),
 	)
 
